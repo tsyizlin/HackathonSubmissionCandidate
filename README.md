@@ -1,34 +1,147 @@
-Prerequisites:
+# Premise of Code Agent
+As of March 2025 with the release of Gemini 2.5 pro, as well as recent advances in AI Agent coding with high intelligence models from OpenAI such as o3 and o4-mini, we are able to one shot applications if we have some example code and proper docs.
 
-Python 3 is installed
+By this, I mean that with proper documentation, someone who wants to use Waku can quickly integrate it into their app if they point their code agent to a knowledge base and sample code.
 
-NPM is installed
+This will only get more easy as coding agents get exponentially better.
 
-aider-chat is installed using pip so it is available to run from the command line:
+Therefore I will demonstrate this with the smartest LLM models available today.
 
-```
-pip install aider-chat
-```
+I think that the most value I can provide to the Waku ecosystem, rather than building a trivial sample app, is to demonstrate the future of coding by making a system that makes it easy for a developer who is new to Waku to build a working app. New developers can use this system to quickly make whatever app they want.
 
-The environment variable OPENROUTER_API_KEY is set with a valid openrouter API key with credits available (approximately $5 should be more than sufficient for app generation)
+If the developers of the Waku docs target their docs towards LLM usage, they can vastly improve the new developer experience, and through this make Waku be used by a lot more people.
 
-app_generator.sh is a bash script, so this will only run on linux or mac os. If you are running on windows, you can have an LLM create a windows version of this script.
+# Description of how developing my hackathon entry went
+Going into the hackathon, I spoke to Guru who said that I should use his sample app as a template to work from, because the waku docs had not been updated fully with the latest changes. This was not ideal, because I wasnt sure where I could trust the docs and where they might steer me wrong. 
 
-Setup:
+My original plan was to use the docs and convert them into a condensed and summarized version that an AI LLM could work from to create and modify apps using Waku quickly, to let a developer use Waku without needing to fully understand the system themselves.
 
-clone this repo.
+However, I felt that taking this path was risky, because if the docs were outdated, it might fail to properly code apps.
 
-install npm, python, and aider-chat.
+Instead, I took the sample app provided by Guru and ran it through an AI coding agent (Aider) using Gemini Pro 2.5 and Claude 4 Sonnet to refactor the sample app to separate the Waku code from the application code. This way the application code could be updated without touching the working Waku code. I refactored it as well to handle listening on multiple contentTopics and stripped out Codex and Wallet code, to give a coding agent the best change of being able to one shot change the sample code into a whole different app, given simple instructions.
 
-run "./app_generator.sh" from your linux terminal.
+Testing and refactoring the app cost about $15-$20 of LLM usage with Gemini pro 2.5.
 
-When prompted, provide a full description of the app you want it to build for you.
+After I was happy with the new simplified and refactored sample app, I created an app generator script that would take a description of the new app, and create a project plan. Then it was instructed to repeatedly prompt a coding agent to modify the sample app until it had completed the project plan. Then I would test the sample app to see if it worked as expected. If so, it was a one shot app. If not, I would run specific fixes through the Aider coding agent (up to 3 corrections) such as "make sure it connects to Waku before polling for changes". 
 
-When it is finished, test the app.
+Creating the app generator cost about $10-$15 of Gemini 2.5 Pro usage.
 
-if there are further changes needed to finish the app, you can use aider to finish those:
+In this way I was able to completely change the sample app into new apps from the Waku Project Ideas list that was given as suggestions for what apps to build for the hackathon.
 
-> aider --weak-model openrouter/anthropic/claude-3-5-haiku-20241022 --edit-format diff --model openrouter/anthropic/claude-sonnet-4
-> /add **/*.py **/*.js **/*.md **/*.html **/*.css **/*.sh **/*.yaml **/*.sql **/*.ts **/*.tsx
-> Fix the part of the app that {description of problems}
+The starting example app:
+A "confession board" and a "wisdom board", demonstrating anonymous messaging board using Waku messaging and persisting (semi ephemerally) to the Waku store
 
+I was successfully able to 1-shot these sample apps using my app generator:
+
+(1) Adding password encryption to the confession board
+This app modifies the sample app to add password encryption so all messages are shown as encrypted, but the user can decrypt messages using a password. 
+
+This cost $0.68 to create.
+
+https://replit.com/@MO58/HackathonSuccessfulAppPasswordEncrypted
+
+It is deployed here:
+https://hackathon-successful-app-password-encrypted-mo58.replit.app/
+
+The github code is here:
+https://github.com/tsyizlin/HackathonSuccessfulAppPasswordEncrypted
+
+The log of the coding agent is hosted here:
+https://text-host-hub-mo58.replit.app/content/471acf39-164f-4396-a1ff-07062083ddd8/display
+
+(2) Creating a Tic Tac Toe game
+This demonstrates creating games with Waku messaging.
+This created the game with one shot, but required 2 more prompts to correct the logic for Player O waiting for Player X first move.
+This cost $2.50 cents to create with the most state of the art coding LLM. I wrote zero lines of code for this. Cost was higher for this one because full Waku documentation was included in the coding agent prompt.
+
+It is deployed here:
+https://hackathon-successful-app-tic-tac-mo58.replit.app/
+The github code is here:
+
+The log of the coding agent is hosted here:
+https://text-host-hub-mo58.replit.app/content/2305734b-96ea-49d6-9dd3-b664ae32c6eb/display
+
+(3) A place where people can review twitter accounts, leaving a rating and comments. Allows anonymous review of twitter accounts in a censorship resistant way.
+
+This cost $1.10 to create. I wrote zero lines of code for this. It required no corrections after the app generator run.
+
+It is deployed here:
+https://hackathon-successful-app-twitter-review-mo58.replit.app/
+
+The github code is here:
+https://github.com/tsyizlin/HackathonSuccessfulAppTwitterReview
+
+The log of the coding agent is hosted here:
+https://text-host-hub-mo58.replit.app/content/fc299a3b-6a2f-4d3f-ae8a-4e472dcda395/display
+
+Finally, I supply the code for the coding agent script along with the simplified example app, through which others can potentially one-shot new apps:
+
+https://github.com/tsyizlin/HackathonSubmissionCandidate
+
+This sample app is deployed here:
+
+https://hackathon-submission-candidate-mo58.replit.app/
+
+
+# App Generator
+
+This utility helps you generate applications by describing them to an LLM
+
+## Prerequisites
+
+Before you begin, ensure you have the following installed and configured:
+
+*   **Python 3**
+*   **NPM**
+*   **aider-chat**: Install it using pip if you haven't already:
+    ```bash
+    pip install aider-chat
+    ```
+*   **OpenRouter API Key**: The environment variable `OPENROUTER_API_KEY` must be set with a valid OpenRouter API key.
+    *   *Note: Ensure your API key has available credits. Approximately $5 should be more than sufficient for a typical app generation.*
+*   **Bash Environment**: `app_generator.sh` is a bash script, designed to run on Linux or macOS.
+    *   *Windows Users: You may need to use a Linux environment (like WSL) or have an LLM assist in converting `app_generator.sh` to a Windows-compatible script (e.g., a `.bat` or PowerShell script).*
+
+## Setup & Usage
+
+1.  **Clone Repository**:
+    If you haven't already, clone the repository containing `app_generator.sh` to your local machine.
+
+2.  **Navigate to Directory**:
+    Open your terminal and change to the directory where you cloned the repository.
+
+3.  **Run the Generator**:
+    Execute the script:
+    ```bash
+    ./app_generator.sh
+    ```
+
+4.  **Describe Your App**:
+    When prompted by the script, provide a detailed and full description of the application you want to build.
+
+5.  **Test the App**:
+    Once the script finishes, thoroughly test the generated application to ensure it meets your initial description.
+
+## Iterating and Making Changes
+
+If the generated app requires further modifications or bug fixes, you can use `aider` to refine it:
+
+1.  **Start `aider`**:
+    Launch `aider` from your terminal within the app's project directory. You can specify your preferred models. For example, to use Claude Haiku for context/smaller tasks and Claude Sonnet for main generation, with diff edit format:
+    ```bash
+    aider --weak-model openrouter/anthropic/claude-3-5-haiku-20241022 --edit-format diff --model openrouter/anthropic/claude-sonnet-4
+    ```
+
+2.  **Add Project Files to Context**:
+    Once `aider` is running, add all relevant project files to the chat context. You can use a broad glob pattern like this (type this command into the `aider` prompt):
+    ```
+    /add **/*.py **/*.js **/*.md **/*.html **/*.css **/*.sh **/*.yaml **/*.sql **/*.ts **/*.tsx
+    ```
+    Adjust the pattern as needed to include all your source files.
+
+3.  **Request Changes**:
+    Clearly describe the problems or modifications you want to make. For example:
+    ```
+    Fix the part of the app that {your detailed description of problems or desired changes}
+    ```
+    Replace `{your detailed description...}` with your specific instructions. `aider` will then attempt to implement the changes.
