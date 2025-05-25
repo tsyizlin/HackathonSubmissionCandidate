@@ -25,7 +25,7 @@ My original plan was to use the docs and convert them into a condensed and summa
 
 However, I felt that taking this path was risky, because if the docs were outdated, it might fail to properly code apps.
 
-Instead, I took the sample app provided by Guru and ran it through an AI coding agent (Aider) using Gemini Pro 2.5 and Claude 4 Sonnet to refactor the sample app to separate the Waku code from the application code. This way the application code could be updated without touching the working Waku code. I refactored it as well to handle listening on multiple contentTopics and stripped out Codex and Wallet code, to give a coding agent the best change of being able to one shot change the sample code into a whole different app, given simple instructions.
+Instead, I took the sample app provided by Guru and ran it through an AI coding agent (Aider) using Gemini Pro 2.5 and Claude 4 Sonnet to refactor the sample app to separate the Waku code from the application code. This way the application code could be updated without touching the working Waku code. I refactored it as well to handle listening on multiple contentTopics and stripped out Codex and Wallet code, to give a coding agent the best chance of being able to one shot change the sample code into a whole different app, given simple instructions.
 
 Testing and refactoring the app cost about $15-$20 of LLM usage with Gemini pro 2.5.
 
