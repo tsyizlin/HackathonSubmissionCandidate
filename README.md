@@ -38,9 +38,9 @@ In this way I was able to completely change the sample app into new apps from th
 The starting example app:
 A "confession board" and a "wisdom board", demonstrating anonymous messaging board using Waku messaging and persisting (semi ephemerally) to the Waku store
 
-I was successfully able to 1-shot these sample apps using my app generator:
+I was successfully able to 1-shot create apps using my app generator. Here are the apps I built without writing any code and just using the App Generator i made:
 
-(1) Adding password encryption to the confession board
+# (1) Adding password encryption to the confession board
 This app modifies the sample app to add password encryption so all messages are shown as encrypted, but the user can decrypt messages using a password. 
 
 This cost $0.68 to create.
@@ -61,7 +61,7 @@ Prompt used to generate this in one shot:
 make a password based message system. the password that the user gives encrypts their message. any other user can subscribe to that topic, get the messages, and decode them by entering a topic and password.
 ```
 
-(2) Creating a Tic Tac Toe game
+# (2) Creating a Tic Tac Toe game
 This demonstrates creating games with Waku messaging.
 This created the game with one shot, but required 2 more prompts to correct the logic for Player O waiting for Player X first move.
 This cost $2.50 cents to create with the most state of the art coding LLM. I wrote zero lines of code for this. Cost was higher for this one because full Waku documentation was included in the coding agent prompt.
@@ -79,7 +79,7 @@ Prompt used to generate this:
 ```
 lets make a web based tic tac toe game using the waku messaging protocol, so that people on different computers can play against each other if they are on the same contentTopic as each other. when a user makes a move, it gets broadcast, and then the other user sees it on their browser which is watching for those broadcasts, and then they are allowed to make a move back. make it follow the rules of tic tac toe. Carefully think through how this works so that they can play a game. Make sure that players can easily join the same game. person who starts the game gets X, gets a room link to give to other player, who will join as player O. X can play their first move even if player O hasnt joined yet. When O joins the link, they get player O and have to wait until it is their turn (X has moved) before they can play their first move. Turns go back and forth, usual tic tac toe stuff, just communication is through Waku.
 ```
-(3) A place where people can review twitter accounts, leaving a rating and comments. Allows anonymous review of twitter accounts in a censorship resistant way.
+# (3) A place where people can review twitter accounts, leaving a rating and comments. Allows anonymous review of twitter accounts in a censorship resistant way.
 
 This cost $1.10 to create. I wrote zero lines of code for this. It required no corrections after the app generator run.
 
@@ -97,8 +97,9 @@ Prompt used to generate this in one shot:
 Imagine a decentralized, privacy-preserving review board where anyone can anonymously rate and review Twitter accounts. Users effortlessly post short comments and ratings (1-10) for any given Twitter username, with each account's feedback organized on a unique Waku topic. Think out all the complexities of the app flow.
 ```
 
+# 4 - Modified Sample App
 
-Finally, I supply the code for the coding agent script along with the simplified example app, through which others can potentially one-shot new apps:
+Finally, I am also supplying the code for the coding agent script along with the simplified example app, through which others can potentially one-shot new apps. This was the base I used to create all the other apps.
 
 https://github.com/tsyizlin/HackathonSubmissionCandidate
 
@@ -106,9 +107,7 @@ This sample app (confession board + wisdom board) is deployed here:
 
 https://hackathon-submission-candidate-mo58.replit.app/
 
-
-
-# App Generator
+# App Generator Usage Instructions
 
 This utility helps you generate applications by describing them to an LLM
 
