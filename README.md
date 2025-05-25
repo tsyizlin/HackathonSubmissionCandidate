@@ -1,6 +1,6 @@
 # Video of App Generator in action:
 
-[Video of app generator in action](https://github.com/tsyizlin/HackathonSubmissionCandidate/demo.mp4)
+[Video of app generator in action](https://github.com/tsyizlin/HackathonSubmissionCandidate/raw/refs/heads/main/demo.mp4)
 
 This video shows the app generator making a tic tac toe game from a simple prompt and a starting example app. The coding agent ran for about 5 minutes to create the app, and that section of the video is run in 2x speed. At the end, we show us testing the app. There is a cut between where we ran the coding agent and where we tested the app, where 2 fixing prompts were ran to get the tic tac toe game into a final working state.
 
