@@ -1,4 +1,8 @@
+# Video of App Generator in action:
+
+<video src="https://github.com/tsyizlin/HackathonSubmissionCandidate/demo.mp4" controls width="500"></video>
 # Premise of Code Agent
+
 As of March 2025 with the release of Gemini 2.5 pro, as well as recent advances in AI Agent coding with high intelligence models from OpenAI such as o3 and o4-mini, we are able to one shot applications if we have some example code and proper docs.
 
 By this, I mean that with proper documentation, someone who wants to use Waku can quickly integrate it into their app if they point their code agent to a knowledge base and sample code.
@@ -163,3 +167,8 @@ If the generated app requires further modifications or bug fixes, you can use `a
     Fix the part of the app that {your detailed description of problems or desired changes}
     ```
     Replace `{your detailed description...}` with your specific instructions. `aider` will then attempt to implement the changes.
+
+
+# Recommended quick setup
+
+Use replit, clone the repo to a new replit. install aider-chat on the replit. Then run from shell ./app_generator.sh
