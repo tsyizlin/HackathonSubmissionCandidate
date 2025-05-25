@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+/* Removed @plugin "tailwindcss-animate"; - configure in tailwind.config.js */
+
+/* Removed @custom-variant dark (&:is(.dark *)); - Tailwind handles dark mode variants automatically */
+
+:root {
+  /* Cypherpunk Cathode Display Theme */
+  --background: #032115;
+  --foreground: #06f391;
+  --card: #021810;
+  --card-foreground: #06f391;
+  --popover: #021810;
+  --popover-foreground: #06f391;
+  --primary: #06f391;
+  --primary-foreground: #021810;
+  --secondary: #043a25;
+  --secondary-foreground: #0cff9e;
+  --muted: #043a25;
+  --muted-foreground: #04c676;
+  --accent: #032b1c;
+  --accent-foreground: #06f391;
+  --destructive: #ff5252;
+  --destructive-foreground: #021810;
+  --border: #054a30;
+  --input: #054a30;
+  --ring: #06f391;
+  --radius: 0.5rem;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  /* Enhanced cathode display effect */
+  text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Enhanced scanline effect for the cathode display look */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.05) 0px,
+    rgba(0, 0, 0, 0.05) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAANASURBVGhD7ZhNSFRRFMfPvTOjWZqVH6UWRkFEQUQQUdBGiDaFRJsWbdq0KAja9rFsUxBR0aYgaNOiRUEfVBBREH1BQRQVhVr5kaPjfLzbc+688Xpz5r0ZdWbGmvngdc+5557z7n/uPffeN4qiKIqiKIqiKP8/Jggzsnr1arN9+3bT0tJiZs2aZfL5vOnr6zNPnjwxL1++DAYO0t7ebnbs2GHWrVtnamtrTTqdNl1dXebhw4fm2bNnwciBNDQ0mD169plVK1aYdDptCoWC6e7uNg8ePDCvXr0KRg3S2tpqdu3aZZYvX25SqZTJ5XLm/fv35u7du+bNmzfByEEWLlxodu/ebZYuXWoymYzJ5/Pm48eP5u7du+bdu3fByEGam5vNvn37zJIlS0wymTTFYtF8+vTJ3L5923z48CEYOQjFsX//frNo0SKTSCRMqVQyXz58MTdv3jS9vb3ByEFmz55tDhw4YBYsWGDi8bgpl8vm69ev5vr16+bbt3/ByEFmzpxpDh48aJqamkwsFjPlctmUSiVz7do18/3792DkIDNmzDCHDh0y8+bNM9FoNAjCXL161fz48SMYOcj06dPN4cOHTWNjo4lEIkEQ5sqVK+bnz5/ByEGmTZtmjhw5YhoaGkw4HA6CMJcvXza/fv0KRg4ydepUc/ToUVNfX29CoVAQhLl06ZL5/ft3MHKQKVOmmBPHj5va2lrjum4QhLlw4YL5+/dvMHKQSZMmmRMnTpiamhrjOI4NolarZc6fP2/+/fsXjBxk4sSJ5tSpk6aqqsrEYjHjuq6JRqPm7NmzJpvNBiMHGT9+vDl9+nSprKw0sVjMuK5rotGoOXPmjMnlcsHIQcaNG2fOnDljKioqTDweN/F43CQSCXPq1CmTz+eDkYOMHTvWnD171lRUVJhEImESiYRJJpPmxIkTplAoBCMHGTNmjB2joqLCJJNJk0qlTCqVMsePHzfFYjEYOcjo0aPtuIqKCpNKpUw6nTapVMocO3bMlMvlYOQgo0aNsuNGjx5tKisrTTqdNul02hw9etRUVVUFIyuKoiiKoiiKokwcjPkPQ46t5w1XLUMAAAAASgRK5CYII=");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.2;
+}
+
+/* Enhanced glow effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(6, 243, 145, 0.08) 0%,
+    rgba(3, 33, 21, 0) 70%
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* Enhanced scanline background class for components */
+.bg-scanline {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15) 0px,
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+}
+
+/* Enhanced CRT flicker animation */
+@keyframes crt-flicker {
+  0% {
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  }
+  2% {
+    opacity: 0.9;
+    text-shadow: 0 0 5px rgba(6, 243, 145, 0.8);
+  }
+  4% {
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  }
+  50% {
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  }
+  52% {
+    opacity: 0.94;
+    text-shadow: 0 0 6px rgba(6, 243, 145, 0.9);
+  }
+  54% {
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  }
+  100% {
+    opacity: 0.98;
+    text-shadow: 0 0 3px rgba(6, 243, 145, 0.7);
+  }
+}
+
+/* Apply enhanced flicker to all elements with primary color */
+.text-primary {
+  animation: crt-flicker 8s infinite;
+}
+
+/* Add phosphor persistence effect */
+@keyframes phosphor-persistence {
+  0% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  /* Add monospace font for the terminal look */
+  input, button, textarea, select {
+    font-family: var(--font-mono);
+  }
+  
+  /* Add terminal cursor effect to inputs */
+  input:focus {
+    animation: cursor-blink 1s step-end infinite;
+  }
+  
+  @keyframes cursor-blink {
+    from, to {
+      border-right: 2px solid transparent;
+    }
+    50% {
+      border-right: 2px solid var(--foreground);
+    }
+  }
+  
+  /* Terminal-specific styling */
+  button, .button {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Add glow effect to primary elements */
+  .text-primary, button:hover, a:hover {
+    text-shadow: 0 0 4px rgba(6, 243, 145, 0.6);
+  }
+  
+  /* Add terminal-style borders */
+  .border {
+    border-color: rgba(6, 243, 145, 0.3);
+  }
+  
+  /* Add terminal-style scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(3, 33, 21, 0.5);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(6, 243, 145, 0.3);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(6, 243, 145, 0.5);
+  }
+}
+
+/* Custom glow effects for status indicators */
+.terminal-glow-green {
+  box-shadow: 0 0 8px 2px rgba(6, 243, 145, 0.7);
+}
+
+.terminal-glow-amber {
+  box-shadow: 0 0 8px 2px rgba(255, 193, 7, 0.7);
+}
+
+.terminal-glow-red {
+  box-shadow: 0 0 8px 2px rgba(255, 82, 82, 0.7);
+}
