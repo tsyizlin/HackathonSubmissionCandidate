@@ -1,6 +1,9 @@
 # Video of App Generator in action:
 
 <video src="https://github.com/tsyizlin/HackathonSubmissionCandidate/demo.mp4" controls width="500"></video>
+
+This video shows the app generator making a tic tac toe game from a simple prompt and a starting example app. The coding agent ran for about 5 minutes to create the app, and that section of the video is run in 2x speed. At the end, we show us testing the app. There is a cut between where we ran the coding agent and where we tested the app, where 2 fixing prompts were ran to get the tic tac toe game into a final working state.
+
 # Premise of Code Agent
 
 As of March 2025 with the release of Gemini 2.5 pro, as well as recent advances in AI Agent coding with high intelligence models from OpenAI such as o3 and o4-mini, we are able to one shot applications if we have some example code and proper docs.
